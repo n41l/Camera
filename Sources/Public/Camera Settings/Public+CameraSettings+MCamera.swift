@@ -18,6 +18,10 @@ public extension MCamera {
         captureSession: AVCaptureSession(),
         captureDeviceInputType: AVCaptureDeviceInput.self
     ))}
+    
+    static func new(manager: CameraManager) -> MCamera {
+        MCamera(manager: manager)
+    }
 }
 
 

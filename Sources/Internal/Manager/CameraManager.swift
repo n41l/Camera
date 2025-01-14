@@ -40,6 +40,13 @@ import AVKit
         self.captureSession = captureSession
         self.frontCameraInput = CDI.get(mediaType: .video, position: .front)
         self.backCameraInput = CDI.get(mediaType: .video, position: .back)
+        self.backCameraInput
+    }
+}
+
+public extension CameraManager {
+    static func new() -> CameraManager {
+        CameraManager(captureSession: AVCaptureSession(), captureDeviceInputType: AVCaptureDeviceInput.self)
     }
 }
 

@@ -11,11 +11,11 @@
 
 import AVKit
 
-struct CameraManagerAttributes {
+public struct CameraManagerAttributes {
     var capturedMedia: MCameraMedia? = nil
     var error: MCameraError? = nil
 
-    var outputType: CameraOutputType = .photo
+    var outputType: CameraOutputType = .video
     var cameraPosition: CameraPosition = .back
     var isAudioSourceAvailable: Bool = true
     var zoomFactor: CGFloat = 1.0
@@ -27,7 +27,7 @@ struct CameraManagerAttributes {
     var hdrMode: CameraHDRMode = .auto
     var cameraFilters: [CIFilter] = []
     var mirrorOutput: Bool = false
-    var isGridVisible: Bool = true
+    var isGridVisible: Bool = false
 
     var deviceOrientation: AVCaptureVideoOrientation = .portrait
     var frameOrientation: CGImagePropertyOrientation = .right

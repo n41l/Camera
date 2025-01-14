@@ -24,6 +24,7 @@ import MijickTimer
 // MARK: Setup
 extension CameraManagerVideoOutput {
     func setup(parent: CameraManager) throws(MCameraError) {
+        self.output.movieFragmentInterval = CMTime.invalid
         self.parent = parent
         try parent.captureSession.add(output: output)
     }
