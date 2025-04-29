@@ -137,6 +137,8 @@ public extension MCameraScreen {
      */
     func setLightMode(_ lightMode: CameraLightMode) throws { try cameraManager.setLightMode(lightMode) }
 
+    func getMaxResolution() -> AVCaptureSession.Preset { cameraManager.getMaxResolution() }
+    
     /**
      Set the camera resolution.
 
@@ -144,6 +146,11 @@ public extension MCameraScreen {
      */
     func setResolution(_ resolution: AVCaptureSession.Preset) { cameraManager.setResolution(resolution) }
 
+    
+    func getMinFrameRate() -> Float64? { cameraManager.getMinFrameRate() }
+    
+    func getMaxFrameRate() -> Float64? { cameraManager.getMaxFrameRate() }
+    
     /**
      Set the camera frame rate.
 

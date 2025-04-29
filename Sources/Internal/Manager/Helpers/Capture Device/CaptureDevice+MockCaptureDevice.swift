@@ -31,6 +31,7 @@ class MockCaptureDevice: NSObject, CaptureDevice {
     var hasTorch: Bool { true }
     var isExposurePointOfInterestSupported: Bool { true }
     var isFocusPointOfInterestSupported: Bool { true }
+    var maxResolution: CMVideoDimensions { .init(width: 1920, height: 1080) }
 
     // MARK: Setters
     var videoZoomFactor: CGFloat = 1

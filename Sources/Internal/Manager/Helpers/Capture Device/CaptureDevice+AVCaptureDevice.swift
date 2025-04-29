@@ -17,8 +17,39 @@ extension AVCaptureDevice: CaptureDevice {
     var maxExposureDuration: CMTime { activeFormat.maxExposureDuration }
     var minISO: Float { activeFormat.minISO }
     var maxISO: Float { activeFormat.maxISO }
-    var minFrameRate: Float64? { activeFormat.videoSupportedFrameRateRanges.first?.minFrameRate }
-    var maxFrameRate: Float64? { activeFormat.videoSupportedFrameRateRanges.first?.maxFrameRate }
+    var minFrameRate: Float64? {
+        var minFrameRate: Float64? = nil
+        for format in formats {
+            for range in format.videoSupportedFrameRateRanges {
+                if range.minFrameRate < minFrameRate ?? 0 {
+                    minFrameRate = range.minFrameRate
+                }
+            }
+        }
+        return minFrameRate
+    }
+    var maxFrameRate: Float64? {
+        var maxFrameRate: Float64? = nil
+        for format in formats {
+            for range in format.videoSupportedFrameRateRanges {
+                if range.maxFrameRate > maxFrameRate ?? 0 {
+                    maxFrameRate = range.maxFrameRate
+                }
+            }
+        }
+        return maxFrameRate
+    }
+    var maxResolution: CMVideoDimensions {
+        var maxResolution: CMVideoDimensions = .init()
+        for format in formats {
+            let dimensions = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
+            if dimensions.width > maxResolution.width && dimensions.height > maxResolution.height {
+                maxResolution = dimensions
+            }
+        }
+        
+        return maxResolution
+    }
 }
 
 // MARK: Getters & Setters

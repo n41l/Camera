@@ -40,7 +40,6 @@ import AVKit
         self.captureSession = captureSession
         self.frontCameraInput = CDI.get(mediaType: .video, position: .front)
         self.backCameraInput = CDI.get(mediaType: .video, position: .back)
-        self.backCameraInput
     }
 }
 
@@ -371,6 +370,19 @@ private extension CameraManager {
 
 // MARK: Set Resolution
 extension CameraManager {
+    func getMaxResolution() -> AVCaptureSession.Preset {
+        guard let resolution = getCameraInput()?.device.maxResolution else { fatalError() }
+        if resolution.width == 1280 {
+            return .hd1280x720
+        } else if resolution.width == 1920 {
+            return .hd1920x1080
+        } else if resolution.width >= 3840 {
+            return .hd4K3840x2160
+        } else {
+            fatalError()
+        }
+    }
+    
     func setResolution(_ resolution: AVCaptureSession.Preset) {
         guard resolution != attributes.resolution, resolution != attributes.resolution, !isChanging else { return }
 
@@ -381,6 +393,14 @@ extension CameraManager {
 
 // MARK: Set Frame Rate
 extension CameraManager {
+    func getMaxFrameRate() -> Float64? {
+        getCameraInput()?.device.maxFrameRate
+    }
+    
+    func getMinFrameRate() -> Float64? {
+        getCameraInput()?.device.minFrameRate
+    }
+    
     func setFrameRate(_ frameRate: Int32) throws {
         guard let device = getCameraInput()?.device, frameRate != attributes.frameRate, !isChanging else { return }
 
